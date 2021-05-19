@@ -15,26 +15,19 @@ function makeAJAXCall(methodType, url, callback, async = true, data = null) {
     let xhr = new XMLHttpRequest();
     xhr.open(methodType, url, async);
     xhr.onreadystatechange = function () {
-     //   console.log(methodType + " State Changed Called at " + showTime() + " .Ready State: " +
-       //   xhr.readyState + " Status:" + xhr.status);
-
         if (xhr.readyState === 4) {
             if (xhr.status === 200 || xhr.status === 201) {
                 callback(xhr.responseText);
             } else if (xhr.status >= 400) {
                 console.log("Handle 400 client Error or 500 server error");
             }
-
         }
-
     }
     if(data){
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(data));
     } else
-         xhr.send();
-    
-    
+         xhr.send(); 
     console.log(methodType + " request sent to the server at " + showTime());
 }
 
